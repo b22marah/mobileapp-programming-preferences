@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -23,19 +24,31 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         myPreferenceRef = getSharedPreferences("MyPreferenceName", MODE_PRIVATE);
-        SharedPreferences.Editor myPreferenceEditor = myPreferenceRef.edit();
-        myPreferenceRef = getPreferences(MODE_PRIVATE);
+       // SharedPreferences.Editor myPreferenceEditor = myPreferenceRef.edit();
+       // myPreferenceRef = getPreferences(MODE_PRIVATE);
         myPreferenceEditor = myPreferenceRef.edit();
 
-        TextView prefTextRef=new TextView(this);
-        prefTextRef=(TextView)findViewById(R.id.prefText);
-        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
+     //   TextView prefTextRef = findViewById(R.id.prefText);
+     //   prefTextRef.setText(myPreferenceRef.getString("MyappPreferenceString", "No preference found."));
+
+      //  TextView prefTextRef=new TextView(this);
+      //  prefTextRef=(TextView)findViewById(R.id.prefText);
+      //  prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
     }
 
-    public void savePref(View v){
+    @Override
+    protected void onResume(){
+        super.onResume();
+        TextView prefTextRef = findViewById(R.id.prefText);
+        prefTextRef.setText(myPreferenceRef.getString("MyappPreferenceString", "No preference found."));
+    }
+
+    public void savePref(View view){
         // Get the text
-        EditText newPrefText=new EditText(this);
-        newPrefText=(EditText)findViewById(R.id.settingseditview);
+        EditText newPrefText = findViewById(R.id.edit_Text);
+
+      //  EditText newPrefText=new EditText(this);
+      //  newPrefText=(EditText)findViewById(R.id.edit_Text);
 
         // Store the new preference
         myPreferenceEditor.putString("MyAppPreferenceString", newPrefText.getText().toString());
@@ -48,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Clear the EditText
         newPrefText.setText("");
+    }
+
+    public void openSecondActivity(View view) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
     }
 
 

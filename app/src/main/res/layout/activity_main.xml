@@ -34,4 +34,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
+    <Button
+        android:id="@+id/openPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openSecondActivity"
+        android:text="Add Preferences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prefText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
