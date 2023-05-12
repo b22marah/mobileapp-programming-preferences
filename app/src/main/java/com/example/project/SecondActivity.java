@@ -44,10 +44,5 @@ public class SecondActivity extends AppCompatActivity {
         myPreferenceEditor.apply();
 
         finish();
-
     }
-      /*  // Display preferences
-        TextView prefTextRef = new TextView(this);
-        prefTextRef = (TextView) findViewById(R.id.prefText);
-        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));*/
 }
