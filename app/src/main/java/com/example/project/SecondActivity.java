@@ -15,7 +15,6 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Get a reference to the shared preference
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
