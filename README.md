@@ -169,3 +169,9 @@ protected void onPause() {
 ```
 
 ## Bilder på färdig produkt:
+
+### activity_second.xml
+![img_1.png](img_1.png)
+
+### activity_main.xml
+![img_2.png](img_2.png)
