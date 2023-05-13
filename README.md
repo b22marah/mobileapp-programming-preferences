@@ -70,7 +70,7 @@ Därefter kan användaren skapa sin nya SharedPreferences och när den är klar 
 på knappen i andra aktiviteten. Istället för att skapa / korrigera min första Intent till att skifta aktivitet på nytt, 
 så har jaag instället ett funktions-kall vid knapptryckning som stänger ner den aktuella aktiviteten.
 
-### MainActivity.Java (3):
+### MainActivity.Java (3.1):
 ```
 public void openSecondActivity(View view) {
    Intent intent = new Intent(this, SecondActivity.class);
@@ -78,7 +78,7 @@ public void openSecondActivity(View view) {
 }
 ```
 
-### SecondActivity.Java (3):
+### SecondActivity.Java (3.2):
 ```
 protected void onPause() {
     super.onPause();
@@ -100,7 +100,7 @@ I 'SecondActivity.java', i 'onCreate()'-metoden hämtas det först in all data
 till SharedPreferences och SharedPreferences.Editor, detta görs för att kunna hämta och eventuellt
 spara ny data från SharedPreferences. 
 
-### onCreate:
+### onCreate (4.1):
 ```
 public class SecondActivity extends AppCompatActivity {
 
@@ -127,7 +127,7 @@ att lagras i SharedPrefereces genom att använda "myPreferenceEditor.putString("
 som i sin tur anropar "myPreferenceEditor.apply()", som kommer att spara dem aktuella ändringarna. Efter detta
 avslutas aktiviteten för att återgå till 'activity_main.xml' som jag beskrivit i tidigare del.
 
-### savePref:
+### savePref (4.2):
 ```
 public void savePref(View view) {
     EditText editText = findViewById(R.id.edit_Text);
@@ -143,7 +143,7 @@ public void savePref(View view) {
 Till sist har vi 'onPaus()'-metoden, som fungerar precis likadant som 'savedPref()', som jag nyligen 
 beskrivit, enda skillnaden är att 'onPaus()' sparar värdet ifall / när aktiviteten pausas.
 
-### onPause:
+### onPause (4.3):
 ```
 @Override
 protected void onPause() {
@@ -161,12 +161,28 @@ protected void onPause() {
 
 # 5: Återhämtning av lagrat värde:
 
+När applikationen startar om / startas på nytt efter att varit nedstängd, så anropas 
+en metod som heter "onResume()". Denna metoden har en kodstycke som "hänvisar" till en 
+TextView från våran activity_main.xml, som är den vyn våran SharedPreference visas på.
+Följande kod, är den som gäller för det jag nyss beskrivit.
 
-
-### 
+### MainActivity.Java - 'onResume()' (5):
+```
+@Override
+protected void onResume(){
+    super.onResume();
+    TextView prefTextRef = findViewById(R.id.prefText);
+    prefTextRef.setText(myPreferenceRef.getString("MyappPreferenceString", "No preference found."));
+}
 ```
 
-```
+Första delen av koden "TextView prefTextRef = findViewById(R.id.prefText);" är att 
+programmet skapar en variabel som hänvisar till den TextView:n jag nyss nämnt, 
+medans den andra raden kod "prefTextRef.setText(myPreferenceRef.getString("MyappPreferenceString", "No preference found."));" 
+hämtar det sparade värdet (vår preference) från SharedPreferences med nyckeln som vi döpt till 
+"MyappPreferenceString". Till detta använder koden också ".setText" till våran nyligen skapade variabel 
+för att sätta texten på våran TextView till den texten som finns i våran Shared Preference, finns det inget lagrat värde 
+i Shared Preference så kommer koden istället att spotta ut följande text i våran TextView: "No preference found.".
 
 ## Bilder på färdig produkt:
 
